@@ -10,7 +10,6 @@ import browserHOC from '_hocs/browser';
 
 import AppRouter from '_components/AppRouter';
 import '_styles/normalize.scss';
-import logo from '_images/logo.svg';
 import styles from './App.scss';
 
 const App = ({ routes, browser }) => {
@@ -19,11 +18,6 @@ const App = ({ routes, browser }) => {
   return (
     <div styleName="app">
       <Helmet {...config.app} />
-      <div styleName="header">
-        <img src={logo} alt="logo" role="presentation" />
-        <h1>{config.app.title}</h1>
-      </div>
-      <hr />
       <AppRouter routes={routes} />
     </div>
   );

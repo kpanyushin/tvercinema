@@ -1,0 +1,141 @@
+@import '~styles/variables';
+@import '~styles/mixins';
+
+.root {
+  transition-duration: $hover-transition-time;
+  transition-property: color, opacity;
+
+  &.interactive {
+    cursor: pointer;
+  }
+
+  &.isEllipsisOverflow {
+    @include ellipsisOverflow();
+  }
+}
+
+.color {
+  &-white {
+    color: $color-white;
+  }
+
+  &-black {
+    color: $color-black;
+  }
+
+  &-bTextGray {
+    color: $color-bText-gray;
+  }
+
+  &-base {
+    color: var(--base-color);
+  }
+
+  &-baseText {
+    color: var(--base-color-text);
+  }
+
+  &-tTextGray {
+    color: $color-tText-gray;
+  }
+}
+
+.hover {
+  &-white {
+    @include hover {
+      color: $color-white;
+    }
+  }
+
+  &-black {
+    @include hover {
+      color: $color-black;
+    }
+  }
+
+  &-base {
+    @include hover {
+      color: var(--base-color);
+    }
+  }
+
+  &-baseText {
+    @include hover {
+      color: var(--base-color-text);
+    }
+  }
+}
+
+.textAlign {
+  &-left {
+    text-align: left;
+  }
+
+  &-center {
+    text-align: center;
+  }
+
+  &-right {
+    text-align: right;
+  }
+}
+
+.textTransform {
+  &-uppercase {
+    text-transform: uppercase;
+  }
+
+  &-capitalize {
+    text-transform: capitalize;
+  }
+
+  &-none {
+    text-transform: none;
+  }
+}
+
+.wordBreak {
+  &-normal {
+    word-break: normal;
+  }
+
+  &-breakWord {
+    word-break: break-word;
+  }
+
+  &-breakAll {
+    word-break: break-all;
+  }
+}
+
+.whiteSpace {
+  &-normal {
+    white-space: normal;
+  }
+
+  &-nowrap {
+    white-space: nowrap;
+  }
+
+  &-prewrap {
+    white-space: pre-wrap;
+  }
+}
+
+.cursor {
+  &-pointer {
+    cursor: pointer;
+  }
+
+  &-default {
+    cursor: default;
+  }
+
+  &-text {
+    cursor: text;
+  }
+
+  &-inherit {
+    cursor: inherit;
+  }
+}
