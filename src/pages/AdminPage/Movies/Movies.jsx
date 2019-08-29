@@ -24,11 +24,13 @@ class Movies extends Component {
   }
 
   render() {
+    const { movies, className } = this.props;
+
     return (
-      <div styleName="root">
+      <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
-        <ul styleName="content">
-          {this.props.movies.map(({
+        <ul>
+          {movies.length > 0 && movies.map(({
             id,
             title,
             genre,
@@ -44,6 +46,7 @@ class Movies extends Component {
 }
 
 Movies.propTypes = {
+  className: PropTypes.string,
   movies: PropTypes.array,
   fetchMovies: PropTypes.func,
 };

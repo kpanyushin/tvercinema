@@ -1,24 +1,13 @@
-import CSSModules from 'react-css-modules';
-import React, { Component } from 'react';
-import Helmet from 'react-helmet';
-// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-// import { FETCH_MOVIES } from '_controllers/movies/actions';
-// import { moviesSelector } from '_controllers/movies/selectors';
-
-// import createAction from '_utils/createAction';
+import Helmet from 'react-helmet';
+import React, { Component } from 'react';
+import CSSModules from 'react-css-modules';
 
 import Menu from './Menu';
 import Movies from './Movies';
 
 import styles from './AdminPage.scss';
 
-// @connect(state => ({
-//   movies: moviesSelector(state),
-// }), {
-//   fetchMovies: createAction(FETCH_MOVIES),
-// })
 @CSSModules(styles)
 
 class AdminPage extends Component {
@@ -40,7 +29,9 @@ class AdminPage extends Component {
       <div styleName="root">
         <Helmet title="AdminPage" />
         <Menu styleName="menu" />
-        {section}
+        <div styleName="content">
+          {section}
+        </div>
       </div>
     );
   }
@@ -48,8 +39,6 @@ class AdminPage extends Component {
 
 AdminPage.propTypes = {
   match: PropTypes.object,
-  // movies: PropTypes.array,
-  // fetchMovies: PropTypes.func,
 };
 
 export default AdminPage;
