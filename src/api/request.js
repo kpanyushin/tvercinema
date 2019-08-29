@@ -1,13 +1,13 @@
 import axios from 'axios';
 import config from '_config';
 
-const BASE_URL = '/api';
+const baseURL = config.baseUrl;
 const STUB_DELAY = 1000;
 const METHODS = ['GET', 'DELETE', 'HEAD', 'POST', 'PUT', 'PATCH'];
 
 const sidedRequest = (opts) => {
   if (!__SERVER__) {
-    return axios({ baseURL: BASE_URL, ...opts });
+    return axios({ baseURL, ...opts });
   }
 
   return axios({ baseURL: config.remoteApiUrl, ...opts });
