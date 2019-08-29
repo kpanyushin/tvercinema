@@ -1,0 +1,32 @@
+/* stylelint-disable no-descending-specificity */
+@import '~styles/variables';
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+html,
+body,
+:global(#react-view) {
+  height: 100%;
+  width: 100%;
+  user-select: none;
+}
+
+:global {
+  .preventScroll {
+    #react-view {
+      overflow-y: scroll;
+    }
+  }
+
+  .overflowHidden {
+    overflow: hidden !important;
+  }
+
+  .afterSpace::after {
+    content: '\00a0';
+  }
+}

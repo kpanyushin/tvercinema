@@ -95,6 +95,8 @@ class Text extends PureComponent {
 
     if (!children && !message) return '';
 
+    console.log(this.props, this.props.intl);
+
     return (
       <Tag
         {...dataAttrs}
@@ -131,8 +133,8 @@ Text.propTypes = {
   /* inline styles */
   /* styles throw classes */
   withoutComponentStyles: PropTypes.bool,
-  color: PropTypes.oneOf(['white', 'black', 'bTextGray', 'base', 'baseText', 'tTextGray']),
-  hover: PropTypes.oneOf(['white', 'black', 'base', 'baseText']),
+  color: PropTypes.oneOf(['white', 'black', 'darkGray']),
+  hover: PropTypes.oneOf(['white', 'black']),
   whiteSpace: PropTypes.oneOf(['normal', 'nowrap', 'prewrap']),
   wordBreak: PropTypes.oneOf(['breakWord', 'breakAll', 'normal']),
   textAlign: PropTypes.oneOf(['left', 'center', 'right']),

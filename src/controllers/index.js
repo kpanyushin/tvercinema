@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { intlReducer } from 'react-intl-redux';
 import { connectRouter } from 'connected-react-router';
 import { all } from 'redux-saga/effects';
 
@@ -13,6 +14,7 @@ import usersSagas from './users/sagas';
 export const createRootReducer = history => combineReducers({
   router: connectRouter(history),
   users: usersReducer,
+  intl: intlReducer,
 });
 
 export const rootSaga = function* rootSaga() {

@@ -1,7 +1,6 @@
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { compose } from 'redux';
-import CSSModules from 'react-css-modules';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
@@ -9,19 +8,16 @@ import config from '_config';
 import browserHOC from '_hocs/browser';
 
 import AppRouter from '_components/AppRouter';
+
 import '_styles/normalize.scss';
-import styles from './App.scss';
+import '_styles/common.scss';
 
-const App = ({ routes, browser }) => {
-  console.log('browser', browser);
-
-  return (
-    <div styleName="app">
-      <Helmet {...config.app} />
-      <AppRouter routes={routes} />
-    </div>
-  );
-};
+const App = props => (
+  <Fragment>
+    <Helmet {...config.app} />
+    <AppRouter routes={props.routes} />
+  </Fragment>
+);
 
 App.propTypes = {
   routes: PropTypes.array,
@@ -30,5 +26,5 @@ App.propTypes = {
 
 export default compose(
   browserHOC,
-  Component => CSSModules(Component, styles),
+  Component => Component,
 )(App);

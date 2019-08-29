@@ -1,5 +1,5 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import Helmet from 'react-helmet';
 import { StaticRouter } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';

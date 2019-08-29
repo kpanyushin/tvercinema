@@ -2,7 +2,7 @@
 @import '~styles/mixins';
 
 .root {
-  transition-duration: $hover-transition-time;
+  transition-duration: 0.25s;
   transition-property: color, opacity;
 
   &.interactive {
@@ -23,20 +23,8 @@
     color: $color-black;
   }
 
-  &-bTextGray {
-    color: $color-bText-gray;
-  }
-
-  &-base {
-    color: var(--base-color);
-  }
-
-  &-baseText {
-    color: var(--base-color-text);
-  }
-
-  &-tTextGray {
-    color: $color-tText-gray;
+  &-darkGray {
+    color: $color-dark-gray;
   }
 }
 
@@ -50,18 +38,6 @@
   &-black {
     @include hover {
       color: $color-black;
-    }
-  }
-
-  &-base {
-    @include hover {
-      color: var(--base-color);
-    }
-  }
-
-  &-baseText {
-    @include hover {
-      color: var(--base-color-text);
     }
   }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, hydrate, unmountComponentAtNode } from 'react-dom';
 // import { AppContainer } from 'react-hot-loader';
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
+import { Provider } from 'react-intl-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
 
