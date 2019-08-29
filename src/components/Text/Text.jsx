@@ -95,8 +95,6 @@ class Text extends PureComponent {
 
     if (!children && !message) return '';
 
-    console.log(this.props, this.props.intl);
-
     return (
       <Tag
         {...dataAttrs}

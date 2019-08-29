@@ -1,18 +1,32 @@
 import CSSModules from 'react-css-modules';
-import { injectIntl, intlShape } from 'react-intl';
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { FETCH_MOVIES } from '_controllers/movies/actions';
+import { moviesSelector } from '_controllers/movies/selectors';
+
+import createAction from '_utils/createAction';
 
 import Menu from './Menu';
 
 import styles from './AdminPage.scss';
 
-@injectIntl
+@connect(state => ({
+  movies: moviesSelector(state),
+}), {
+  fetchMovies: createAction(FETCH_MOVIES),
+})
 @CSSModules(styles)
 
 class AdminPage extends Component {
   componentDidMount() {
-    console.log('mount', this.props.intl);
+    this.props.fetchMovies();
+  }
+
+  componentDidUpdate() {
+    console.log('here');
   }
 
   render() {
@@ -20,13 +34,25 @@ class AdminPage extends Component {
       <div styleName="root">
         <Helmet title="AdminPage" />
         <Menu styleName="menu" />
+        <ul styleName="content">
+          {this.props.movies.map(({
+            id,
+            title,
+            genre,
+            rating,
+            duration,
+          }) => (
+            <li key={id}>{`${id} - ${title} - ${genre} - ${rating} - ${duration}`}</li>
+          ))}
+        </ul>
       </div>
     );
   }
 }
 
 AdminPage.propTypes = {
-  intl: intlShape,
+  movies: PropTypes.array,
+  fetchMovies: PropTypes.func,
 };
 
 export default AdminPage;

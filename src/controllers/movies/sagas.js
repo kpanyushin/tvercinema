@@ -3,8 +3,8 @@ import { takeLatest, all, put, call } from 'redux-saga/effects';
 import createAction from '_utils/createAction';
 
 import {
-  fetchMovie as fetchMovieApi,
-  fetchMovies as fetchMoviesApi,
+  fetchMovieExternal as fetchMovieApi,
+  fetchMoviesExternal as fetchMoviesApi,
 } from '_api';
 
 import {
@@ -15,6 +15,7 @@ import {
 
 export function* fetchMovies() {
   try {
+    console.log('pew');
     const response = yield call(fetchMoviesApi);
     yield put(createAction(SET_MOVIES)(response.data));
   } catch (err) {
