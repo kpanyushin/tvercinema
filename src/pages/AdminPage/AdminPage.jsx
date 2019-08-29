@@ -1,58 +1,55 @@
 import CSSModules from 'react-css-modules';
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { FETCH_MOVIES } from '_controllers/movies/actions';
-import { moviesSelector } from '_controllers/movies/selectors';
+// import { FETCH_MOVIES } from '_controllers/movies/actions';
+// import { moviesSelector } from '_controllers/movies/selectors';
 
-import createAction from '_utils/createAction';
+// import createAction from '_utils/createAction';
 
 import Menu from './Menu';
+import Movies from './Movies';
 
 import styles from './AdminPage.scss';
 
-@connect(state => ({
-  movies: moviesSelector(state),
-}), {
-  fetchMovies: createAction(FETCH_MOVIES),
-})
+// @connect(state => ({
+//   movies: moviesSelector(state),
+// }), {
+//   fetchMovies: createAction(FETCH_MOVIES),
+// })
 @CSSModules(styles)
 
 class AdminPage extends Component {
-  componentDidMount() {
-    this.props.fetchMovies();
-  }
+  getSectionComponent = () => {
+    const { match: { params: { section } } } = this.props;
 
-  componentDidUpdate() {
-    console.log('here');
-  }
+    switch (section) {
+      case 'movies': return <Movies />;
+      default: return null;
+    }
+  };
 
   render() {
+    const section = this.getSectionComponent();
+
+    console.log(this.props.match.params.section);
+
     return (
       <div styleName="root">
         <Helmet title="AdminPage" />
         <Menu styleName="menu" />
-        <ul styleName="content">
-          {this.props.movies.map(({
-            id,
-            title,
-            genre,
-            rating,
-            duration,
-          }) => (
-            <li key={id}>{`${id} - ${title} - ${genre} - ${rating} - ${duration}`}</li>
-          ))}
-        </ul>
+        {section}
       </div>
     );
   }
 }
 
 AdminPage.propTypes = {
-  movies: PropTypes.array,
-  fetchMovies: PropTypes.func,
+  match: PropTypes.object,
+  // movies: PropTypes.array,
+  // fetchMovies: PropTypes.func,
 };
 
 export default AdminPage;

@@ -26,6 +26,14 @@
   &-darkGray {
     color: $color-dark-gray;
   }
+
+  &-rollingStone {
+    color: $color-rolling-stone;
+  }
+
+  &-outerSpace {
+    color: $color-outer-space;
+  }
 }
 
 .hover {
@@ -38,6 +46,12 @@
   &-black {
     @include hover {
       color: $color-black;
+    }
+  }
+
+  &-outerSpace {
+    @include hover {
+      color: $color-outer-space;
     }
   }
 }

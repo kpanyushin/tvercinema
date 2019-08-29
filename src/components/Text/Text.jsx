@@ -131,8 +131,8 @@ Text.propTypes = {
   /* inline styles */
   /* styles throw classes */
   withoutComponentStyles: PropTypes.bool,
-  color: PropTypes.oneOf(['white', 'black', 'darkGray']),
-  hover: PropTypes.oneOf(['white', 'black']),
+  color: PropTypes.oneOf(['white', 'black', 'darkGray', 'rollingStone', 'outerSpace']),
+  hover: PropTypes.oneOf(['white', 'black', 'outerSpace']),
   whiteSpace: PropTypes.oneOf(['normal', 'nowrap', 'prewrap']),
   wordBreak: PropTypes.oneOf(['breakWord', 'breakAll', 'normal']),
   textAlign: PropTypes.oneOf(['left', 'center', 'right']),

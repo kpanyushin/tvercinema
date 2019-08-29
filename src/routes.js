@@ -10,7 +10,7 @@ export default [
     sagasToRun: [],
   },
   {
-    path: '/admin',
+    path: '/admin/:section?',
     exact: true,
     cache: false,
     component: AdminPage,

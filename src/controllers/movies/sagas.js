@@ -15,7 +15,6 @@ import {
 
 export function* fetchMovies() {
   try {
-    console.log('pew');
     const response = yield call(fetchMoviesApi);
     yield put(createAction(SET_MOVIES)(response.data));
   } catch (err) {
