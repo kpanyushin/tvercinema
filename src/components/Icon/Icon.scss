@@ -4,7 +4,7 @@
 .root,
 .stroke {
   transition-property: fill, stroke;
-  transition-duration: $hover-transition-time;
+  transition-duration: 0.3s;
 }
 
 .interactive {
@@ -27,54 +27,6 @@
       stroke: $color-black;
     }
   }
-
-  &-bTextGray {
-    fill: $color-bText-gray;
-
-    .stroke {
-      stroke: $color-bText-gray;
-    }
-  }
-
-  &-hoverTGray {
-    fill: $color-hover-tGray;
-
-    .stroke {
-      stroke: $color-hover-tGray;
-    }
-  }
-
-  &-hoverGray {
-    fill: $color-hover-gray;
-
-    .stroke {
-      stroke: $color-hover-gray;
-    }
-  }
-
-  &-base {
-    fill: var(--base-color);
-
-    .stroke {
-      stroke: var(--base-color);
-    }
-  }
-
-  &-baseLight {
-    fill: var(--base-color-light);
-
-    .stroke {
-      stroke: var(--base-color-light);
-    }
-  }
-
-  &-tTextGray {
-    fill: $color-tText-gray;
-
-    .stroke {
-      stroke: $color-tText-gray;
-    }
-  }
 }
 
 .hover {
@@ -94,26 +46,6 @@
 
       .stroke {
         stroke: $color-black;
-      }
-    }
-  }
-
-  &-bTextGray {
-    @include hover {
-      fill: $color-bText-gray;
-
-      .stroke {
-        stroke: $color-bText-gray;
-      }
-    }
-  }
-
-  &-base {
-    @include hover {
-      fill: var(--base-color);
-
-      .stroke {
-        stroke: var(--base-color);
       }
     }
   }

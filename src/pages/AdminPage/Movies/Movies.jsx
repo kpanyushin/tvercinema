@@ -9,6 +9,8 @@ import { moviesSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
+import PreviewCard from '_components/PreviewCard';
+
 import styles from './Movies.scss';
 
 @connect(state => ({
@@ -29,15 +31,20 @@ class Movies extends Component {
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
-        <ul>
+        <ul styleName="moviesList">
           {movies.length > 0 && movies.map(({
             id,
             title,
-            genre,
-            rating,
-            duration,
+            // genre,
+            // rating,
+            // duration,
           }) => (
-            <li key={id}>{`${id} - ${title} - ${genre} - ${rating} - ${duration}`}</li>
+            // <li key={id}>{`${id} - ${title} - ${genre} - ${rating} - ${duration}`}</li>
+            <PreviewCard
+              styleName="previewCard"
+              key={id}
+              title={title}
+            />
           ))}
         </ul>
       </div>

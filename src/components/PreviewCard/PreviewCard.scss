@@ -1,3 +1,16 @@
+@import '~styles/variables';
+
 .root {
-  display: block;
+  width: 290px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 3px 1px $color-rolling-stone;
+}
+
+.icon {
+  width: 80px;
+  height: 80px;
 }

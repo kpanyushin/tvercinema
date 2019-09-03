@@ -16,7 +16,7 @@ const PreviewCard = ({
     {image.v_120_60 ? (
       <img src={image.v_120_60} alt={title} />
     ) : (
-      <Icon name="photo" color="black" />
+      <Icon styleName="icon" name="photo" color="black" />
     )}
     <Text>{title}</Text>
   </div>
