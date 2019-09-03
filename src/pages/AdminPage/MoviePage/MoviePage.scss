@@ -1,0 +1,15 @@
+.root {
+  display: block;
+  padding: 0 20px;
+}
+
+.button {
+  margin-top: 20px;
+  justify-content: center;
+  width: 130px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: space-around;
+}

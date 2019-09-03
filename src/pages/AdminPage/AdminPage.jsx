@@ -5,6 +5,7 @@ import CSSModules from 'react-css-modules';
 
 import Menu from './Menu';
 import Movies from './Movies';
+import MoviePage from './MoviePage';
 import Showtimes from './Showtimes';
 import CinemaHalls from './CinemaHalls';
 
@@ -14,10 +15,10 @@ import styles from './AdminPage.scss';
 
 class AdminPage extends Component {
   getSectionComponent = () => {
-    const { match: { params: { section } } } = this.props;
+    const { match: { params: { section, id } } } = this.props;
 
     switch (section) {
-      case 'movies': return <Movies />;
+      case 'movies': return id ? <MoviePage id={id} /> : <Movies />;
       case 'showtimes': return <Showtimes />;
       case 'cinema halls': return <CinemaHalls />;
       default: return null;

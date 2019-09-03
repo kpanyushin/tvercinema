@@ -9,6 +9,7 @@ import { moviesSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
+import LinkTo from '_components/LinkTo';
 import PreviewCard from '_components/PreviewCard';
 
 import styles from './Movies.scss';
@@ -32,19 +33,13 @@ class Movies extends Component {
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
         <ul styleName="moviesList">
-          {movies.length > 0 && movies.map(({
-            id,
-            title,
-            // genre,
-            // rating,
-            // duration,
-          }) => (
-            // <li key={id}>{`${id} - ${title} - ${genre} - ${rating} - ${duration}`}</li>
-            <PreviewCard
-              styleName="previewCard"
-              key={id}
-              title={title}
-            />
+          {movies.length > 0 && movies.map(({ id, title }) => (
+            <LinkTo key={id} linkTo={`/admin/movies/${id}`}>
+              <PreviewCard
+                styleName="previewCard"
+                title={title}
+              />
+            </LinkTo>
           ))}
         </ul>
       </div>

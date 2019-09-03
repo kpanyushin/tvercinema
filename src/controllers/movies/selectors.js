@@ -10,5 +10,5 @@ export const moviesSelector = createSelector(
 export const movieSelector = createSelector(
   moviesSelector,
   (_, id) => id,
-  (movies, id) => movies.movies[id],
+  (movies, id) => movies.find(movie => movie.id === Number(id)),
 );
