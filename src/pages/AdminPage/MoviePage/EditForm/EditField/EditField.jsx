@@ -19,6 +19,7 @@ const EditField = ({
       styleName={classnames('input', { isEditing })}
       type="text"
       value={value}
+      disabled={!isEditing}
     />
   </li>
 );

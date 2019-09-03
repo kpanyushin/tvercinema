@@ -46,6 +46,7 @@ class Movies extends Component {
 
   handleSaveButtonClick = () => {
     console.info('saved');
+    this.toggleIsEditing(false);
   };
 
   render() {
@@ -81,22 +82,22 @@ class Movies extends Component {
             <Button
               styleName="button"
               backgroundColor="black"
-              onClick={this.handleCancelButtonClick}
+              onClick={this.handleSaveButtonClick}
             >
               <Text
                 color="white"
-                message="cancel"
+                message="save"
                 textAlign="center"
               />
             </Button>
             <Button
               styleName="button"
               backgroundColor="black"
-              onClick={this.handleSaveButtonClick}
+              onClick={this.handleCancelButtonClick}
             >
               <Text
                 color="white"
-                message="save"
+                message="cancel"
                 textAlign="center"
               />
             </Button>
