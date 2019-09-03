@@ -19,7 +19,7 @@ class AdminPage extends Component {
     switch (section) {
       case 'movies': return <Movies />;
       case 'showtimes': return <Showtimes />;
-      case 'ciname halls': return <CinemaHalls />;
+      case 'cinema halls': return <CinemaHalls />;
       default: return null;
     }
   };
