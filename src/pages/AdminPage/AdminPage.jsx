@@ -5,6 +5,8 @@ import CSSModules from 'react-css-modules';
 
 import Menu from './Menu';
 import Movies from './Movies';
+import Showtimes from './Showtimes';
+import CinemaHalls from './CinemaHalls';
 
 import styles from './AdminPage.scss';
 
@@ -16,14 +18,14 @@ class AdminPage extends Component {
 
     switch (section) {
       case 'movies': return <Movies />;
+      case 'showtimes': return <Showtimes />;
+      case 'ciname halls': return <CinemaHalls />;
       default: return null;
     }
   };
 
   render() {
     const section = this.getSectionComponent();
-
-    console.log(this.props.match.params.section);
 
     return (
       <div styleName="root">

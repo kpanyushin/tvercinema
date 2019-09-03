@@ -6,15 +6,18 @@ import { all } from 'redux-saga/effects';
 /* reducers */
 import usersReducer from './users/reducers';
 import moviesReducer from './movies/reducers';
+import showtimesReducer from './showtimes/reducers';
 /* reducers */
 
 /* sagas */
 import usersSagas from './users/sagas';
 import moviesSagas from './movies/sagas';
+import showtimesSagas from './showtimes/sagas';
 /* sagas */
 
 export const createRootReducer = history => combineReducers({
   router: connectRouter(history),
+  showtimes: showtimesReducer,
   movies: moviesReducer,
   users: usersReducer,
   intl: intlReducer,
@@ -22,6 +25,7 @@ export const createRootReducer = history => combineReducers({
 
 export const rootSaga = function* rootSaga() {
   yield all([
+    showtimesSagas(),
     moviesSagas(),
     usersSagas(),
   ]);

@@ -13,7 +13,7 @@ import {
   FETCH_SHOWTIMES,
 } from './actions';
 
-export function* fetchMovies() {
+export function* fetchShowtimes() {
   try {
     const response = yield call(fetchShowtimesApi);
 
@@ -23,7 +23,7 @@ export function* fetchMovies() {
   }
 }
 
-export function* fetchMovie({ payload }) {
+export function* fetchShowtime({ payload }) {
   try {
     const response = yield call(fetchShowtimeApi, payload);
 
@@ -35,7 +35,7 @@ export function* fetchMovie({ payload }) {
 
 export default function* () {
   yield all([
-    takeLatest(FETCH_SHOWTIME, fetchMovie),
-    takeLatest(FETCH_SHOWTIMES, fetchMovies),
+    takeLatest(FETCH_SHOWTIME, fetchShowtime),
+    takeLatest(FETCH_SHOWTIMES, fetchShowtimes),
   ]);
 }
