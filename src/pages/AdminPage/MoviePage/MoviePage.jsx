@@ -1,11 +1,12 @@
 import CSSModules from 'react-css-modules';
 import React, { Component } from 'react';
-import Helmet from 'react-helmet';
+import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Helmet from 'react-helmet';
 
-import { FETCH_MOVIE } from '_controllers/movies/actions';
 import { movieSelector } from '_controllers/movies/selectors';
+import { FETCH_MOVIE, CHANGE_MOVIE, ADD_MOVIE } from '_controllers/movies/actions';
 
 import createAction from '_utils/createAction';
 
@@ -19,12 +20,15 @@ import styles from './MoviePage.scss';
 @connect((state, { id }) => ({
   movie: movieSelector(state, id),
 }), {
+  addMovie: createAction(ADD_MOVIE),
   fetchMovie: createAction(FETCH_MOVIE),
+  changeMovie: createAction(CHANGE_MOVIE),
 })
 @CSSModules(styles)
 
 class Movies extends Component {
   state = {
+    movieData: {},
     isEditing: false,
   };
 
@@ -34,6 +38,14 @@ class Movies extends Component {
     if (!movie || !movie.id) fetchMovie(id);
   }
 
+  componentDidUpdate({ movie: prevMovie }) {
+    const { movie } = this.props;
+
+    if (!_isEqual(movie, prevMovie)) {
+      this.setState({ movieData: movie }); // eslint-disable-line
+    }
+  }
+
   toggleIsEditing = isEditing => this.setState({ isEditing });
 
   handleEditButtonClick = () => {
@@ -41,27 +53,48 @@ class Movies extends Component {
   };
 
   handleCancelButtonClick = () => {
-    this.toggleIsEditing(false);
+    // this.toggleIsEditing(false);
+    this.props.addMovie({
+      genre: 'comedy',
+      title: 'american pie',
+      rating: '9.1',
+      duration: '151',
+    });
   };
 
   handleSaveButtonClick = () => {
-    console.info('saved');
+    const { movieData } = this.state;
+    const { changeMovie } = this.props;
+
+    changeMovie(movieData);
     this.toggleIsEditing(false);
   };
 
+  handleFieldChange = (field, value) => {
+    const { movieData } = this.state;
+
+    this.setState({
+      movieData: {
+        ...movieData,
+        [field]: value,
+      },
+    });
+  };
+
   render() {
-    const { isEditing } = this.state;
+    const { movieData, isEditing } = this.state;
     const { movie, className } = this.props;
     const fields = Object.keys(movie || {});
 
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviePage" />
-        {movie && movie.id && (
+        {movieData && movieData.id && (
           <EditForm
-            data={movie}
+            data={movieData}
             fields={fields}
             isEditing={isEditing}
+            onFieldChange={this.handleFieldChange}
           />
         )}
         {!isEditing && (
@@ -112,7 +145,9 @@ Movies.propTypes = {
   className: PropTypes.string,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   movie: PropTypes.object,
+  addMovie: PropTypes.func,
   fetchMovie: PropTypes.func,
+  changeMovie: PropTypes.func,
 };
 
 export default Movies;

@@ -19,9 +19,21 @@ export default (state = initialState, action) => {
       };
 
     case CHANGE_MOVIE: {
+      // const { movieData, id } = payload;
+
+      // return {
+      //   ...state,
+      //   channels: {
+      //     ...state.channels,
+      //     [channelId]: {
+      //       ...state.channels[channelId],
+      //       ...channelData,
+      //     },
+      //   },
+      // };
       return {
         ...state,
-        movies: payload,
+        movies: state.movies,
       };
     }
 

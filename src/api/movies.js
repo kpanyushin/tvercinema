@@ -16,16 +16,16 @@ export const fetchMovie = id =>
     url: `/movies/${id}`,
   });
 
-export const addMovie = data =>
+export const addMovie = ({ id, ...data }) =>
   Req.POST({
     url: '/movies',
-    params: { data },
+    data,
   });
 
-export const changeMovie = (data, id) =>
+export const changeMovie = ({ id, ...data }) =>
   Req.PUT({
     url: `/movies/${id}`,
-    params: { data },
+    data,
   });
 
 export const deleteMovie = id =>

@@ -7,7 +7,7 @@ const METHODS = ['GET', 'DELETE', 'HEAD', 'POST', 'PUT', 'PATCH'];
 
 const sidedRequest = (opts) => {
   if (!__SERVER__) {
-    return axios({ baseURL, ...opts });
+    return axios({ baseURL: `${config.remoteApiUrl}${baseURL}`, ...opts });
   }
 
   return axios({ baseURL: config.remoteApiUrl, ...opts });

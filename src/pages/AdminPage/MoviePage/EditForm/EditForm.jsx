@@ -11,6 +11,7 @@ const EditForm = ({
   isEditing,
   fields,
   data,
+  onFieldChange,
 }) => (
   <ul styleName="root" className={className}>
     {fields.map(field => field !== 'id' && (
@@ -19,6 +20,7 @@ const EditForm = ({
         label={[field.charAt(0).toUpperCase(), ...field.slice(1)].join('')}
         isEditing={isEditing}
         value={data[field]}
+        onChange={onFieldChange}
       />
     ))}
   </ul>
@@ -29,6 +31,7 @@ EditForm.propTypes = {
   isEditing: PropTypes.bool,
   fields: PropTypes.array,
   data: PropTypes.object,
+  onFieldChange: PropTypes.func,
 };
 
 export default CSSModules(EditForm, styles);
