@@ -27,10 +27,14 @@ import styles from './MoviePage.scss';
 @CSSModules(styles)
 
 class Movies extends Component {
-  state = {
-    movieData: {},
-    isEditing: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      movieData: props.movie || {},
+      isEditing: false,
+    };
+  }
 
   componentDidMount() {
     const { id, movie, fetchMovie } = this.props;
@@ -40,6 +44,8 @@ class Movies extends Component {
 
   componentDidUpdate({ movie: prevMovie }) {
     const { movie } = this.props;
+
+    console.log(movie, prevMovie);
 
     if (!_isEqual(movie, prevMovie)) {
       this.setState({ movieData: movie }); // eslint-disable-line
