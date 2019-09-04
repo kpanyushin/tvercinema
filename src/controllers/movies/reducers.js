@@ -1,22 +1,36 @@
+import _union from 'lodash/union';
+
+import { normalizedMovies } from '_schemas/movies';
+import { merge } from '_utils/merge';
+
 import {
   SET_MOVIES,
   CHANGE_MOVIE,
   DELETE_MOVIE,
 } from './actions';
 
+
 const initialState = {
-  movies: [],
+  movies: {},
+  moviesIds: [],
+  showtimes: {},
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case SET_MOVIES:
+    case SET_MOVIES: {
+      const { entities, result } = normalizedMovies(payload);
+      const moviesData = merge(state.movies, entities.movies);
+      const moviesIds = _union(state.moviesIds, result);
+
       return {
         ...state,
-        movies: payload,
+        movies: moviesData,
+        moviesIds,
       };
+    }
 
     case CHANGE_MOVIE: {
       // const { movieData, id } = payload;

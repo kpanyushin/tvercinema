@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FETCH_MOVIES } from '_controllers/movies/actions';
-import { moviesSelector } from '_controllers/movies/selectors';
+import { denormalizedMoviesSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
@@ -15,7 +15,7 @@ import PreviewCard from '_components/PreviewCard';
 import styles from './Movies.scss';
 
 @connect(state => ({
-  movies: moviesSelector(state),
+  movies: denormalizedMoviesSelector(state),
 }), {
   fetchMovies: createAction(FETCH_MOVIES),
 })

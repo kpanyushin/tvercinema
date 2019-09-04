@@ -141,7 +141,8 @@
             "_pages": "./src/pages",
             "_components": "./src/components",
             "_styles": "./src/styles",
-            "_images": "./src/assets/images"
+            "_images": "./src/assets/images",
+            "_schemas": "./src/schemas"
           }
         }
       ]
@@ -254,6 +255,7 @@
     "memory-cache": "^0.2.0",
     "morgan": "^1.9.0",
     "normalize.css": "^8.0.0",
+    "normalizr": "^3.4.1",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.2",

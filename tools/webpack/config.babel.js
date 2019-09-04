@@ -192,6 +192,7 @@ module.exports = {
       _components: path.resolve(process.cwd(), 'src/components'),
       _styles: path.resolve(process.cwd(), 'src/styles'),
       _images: path.resolve(process.cwd(), 'src/assets/images'),
+      _schemas: path.resolve(process.cwd(), 'src/schemas'),
     },
     extensions: ['.js', '.jsx', '.json']
   },
