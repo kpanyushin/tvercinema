@@ -45,10 +45,7 @@ export function* fetchMovie({ payload }) {
 
 export function* changeMovie({ payload }) {
   try {
-    console.log(payload);
-    const response = yield call(changeMovieApi, payload);
-
-    console.log(response);
+    yield call(changeMovieApi, payload);
   } catch (err) {
     console.error(err);
   }
@@ -56,10 +53,7 @@ export function* changeMovie({ payload }) {
 
 export function* addMovie({ payload }) {
   try {
-    console.log(payload);
-    const response = yield call(addMovieApi, payload);
-
-    console.log(response);
+    yield call(addMovieApi, payload);
   } catch (err) {
     console.error(err);
   }
@@ -67,9 +61,7 @@ export function* addMovie({ payload }) {
 
 export function* deleteMovie({ payload }) {
   try {
-    const response = yield call(deleteMovieApi, payload);
-
-    console.log(response, payload);
+    yield call(deleteMovieApi, payload);
   } catch (err) {
     console.error(err);
   }

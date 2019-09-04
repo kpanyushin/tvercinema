@@ -1,3 +1,4 @@
+export const ADD_SHOWTIME = 'ADD_SHOWTIME';
 export const SET_SHOWTIMES = 'SET_SHOWTIMES';
 export const FETCH_SHOWTIME = 'FETCH_SHOWTIME';
 export const FETCH_SHOWTIMES = 'FETCH_SHOWTIMES';

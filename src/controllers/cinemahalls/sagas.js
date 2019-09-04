@@ -3,14 +3,20 @@ import { takeLatest, all, put, call } from 'redux-saga/effects';
 import createAction from '_utils/createAction';
 
 import {
-  fetchHallExternal as fetchHallApi,
-  fetchHallsExternal as fetchHallsApi,
+  addHall as addHallApi,
+  fetchHall as fetchHallApi,
+  fetchHalls as fetchHallsApi,
+  changeHall as changeHallApi,
+  deleteHall as deleteHallApi,
 } from '_api';
 
 import {
+  ADD_CINEMAHALL,
   SET_CINEMAHALLS,
   FETCH_CINEMAHALL,
   FETCH_CINEMAHALLS,
+  CHANGE_CINEMAHALL,
+  DELETE_CINEMAHALL,
 } from './actions';
 
 export function* fetchCinemaHalls() {
@@ -33,9 +39,36 @@ export function* fetchCinemaHall({ payload }) {
   }
 }
 
+export function* changeCinemaHall({ payload }) {
+  try {
+    yield call(changeHallApi, payload);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function* addCinemaHall({ payload }) {
+  try {
+    yield call(addHallApi, payload);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function* deleteCinemaHall({ payload }) {
+  try {
+    yield call(deleteHallApi, payload);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export default function* () {
   yield all([
+    takeLatest(ADD_CINEMAHALL, addCinemaHall),
     takeLatest(FETCH_CINEMAHALL, fetchCinemaHall),
+    takeLatest(CHANGE_CINEMAHALL, changeCinemaHall),
+    takeLatest(DELETE_CINEMAHALL, deleteCinemaHall),
     takeLatest(FETCH_CINEMAHALLS, fetchCinemaHalls),
   ]);
 }
