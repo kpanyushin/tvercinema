@@ -9,6 +9,9 @@ import { cinemaHallsSelector } from '_controllers/cinemahalls/selectors';
 
 import createAction from '_utils/createAction';
 
+import LinkTo from '_components/LinkTo';
+import PreviewCard from '_components/PreviewCard';
+
 import styles from './CinemaHalls.scss';
 
 @connect(state => ({
@@ -20,7 +23,9 @@ import styles from './CinemaHalls.scss';
 
 class CinemaHalls extends Component {
   componentDidMount() {
-    this.props.fetchCinemaHalls();
+    const { cinemaHalls, fetchCinemaHalls } = this.props;
+
+    if (!cinemaHalls || !cinemaHalls.length) fetchCinemaHalls();
   }
 
   render() {
@@ -29,9 +34,14 @@ class CinemaHalls extends Component {
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
-        <ul>
-          {cinemaHalls.length > 0 && cinemaHalls.map(data => (
-            <li key={data.id}>{data.title}</li>
+        <ul styleName="hallsList">
+          {cinemaHalls.length > 0 && cinemaHalls.map(({ id, title }) => (
+            <LinkTo key={id} linkTo={`/admin/cinemahalls/${id}`}>
+              <PreviewCard
+                styleName="previewCard"
+                title={title}
+              />
+            </LinkTo>
           ))}
         </ul>
       </div>

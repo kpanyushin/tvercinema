@@ -5391,7 +5391,7 @@ hide-powered-by@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hide-powered-by/-/hide-powered-by-1.0.0.tgz#4a85ad65881f62857fc70af7174a1184dccce32b"
 
-history@^4.9.0:
+history@^4.6.3, history@^4.9.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/history/-/history-4.9.0.tgz#84587c2068039ead8af769e9d6a6860a14fa1bca"
   integrity sha512-H2DkjCjXf0Op9OAr6nJ56fcRkTSNrUiv41vNJ6IswJjif6wlpZK0BTfFbi7qK9dXLSYZxkq5lBsj3vUjlYBYZA==
@@ -9019,6 +9019,14 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.2:
   version "16.8.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.2.tgz#09891d324cad1cb0c1f2d91f70a71a4bee34df0f"
   integrity sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
+
+react-redux-router@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/react-redux-router/-/react-redux-router-0.0.14.tgz#1a8583b9dd211018409f1f8d5a79584be52d024e"
+  integrity sha512-9AxXWd+lMUWwoSYPYFMPEk3Bf2bhGfMqx1SDU7MlDgLhdeyO0Iay2bIjRd9y16FtEMv1WvWzu5OTRAaHIoME5g==
+  dependencies:
+    history "^4.6.3"
+    path-to-regexp "^1.7.0"
 
 react-redux@^6.0.1:
   version "6.0.1"
