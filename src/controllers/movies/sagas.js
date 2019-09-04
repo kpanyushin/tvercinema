@@ -7,6 +7,7 @@ import {
   fetchMovie as fetchMovieApi,
   fetchMovies as fetchMoviesApi,
   changeMovie as changeMovieApi,
+  deleteMovie as deleteMovieApi,
 } from '_api';
 
 import {
@@ -15,6 +16,7 @@ import {
   FETCH_MOVIE,
   FETCH_MOVIES,
   CHANGE_MOVIE,
+  DELETE_MOVIE,
 } from './actions';
 
 import { moviesSerializer, movieSerializer } from './serializers';
@@ -63,11 +65,22 @@ export function* addMovie({ payload }) {
   }
 }
 
+export function* deleteMovie({ payload }) {
+  try {
+    const response = yield call(deleteMovieApi, payload);
+
+    console.log(response, payload);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export default function* () {
   yield all([
     takeLatest(ADD_MOVIE, addMovie),
     takeLatest(FETCH_MOVIE, fetchMovie),
     takeLatest(FETCH_MOVIES, fetchMovies),
     takeLatest(CHANGE_MOVIE, changeMovie),
+    takeLatest(DELETE_MOVIE, deleteMovie),
   ]);
 }

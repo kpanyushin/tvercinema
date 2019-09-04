@@ -6,7 +6,12 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 
 import { movieSelector } from '_controllers/movies/selectors';
-import { FETCH_MOVIE, CHANGE_MOVIE, ADD_MOVIE } from '_controllers/movies/actions';
+import {
+  CHANGE_MOVIE,
+  DELETE_MOVIE,
+  FETCH_MOVIE,
+  ADD_MOVIE,
+} from '_controllers/movies/actions';
 
 import createAction from '_utils/createAction';
 
@@ -23,6 +28,7 @@ import styles from './MoviePage.scss';
   addMovie: createAction(ADD_MOVIE),
   fetchMovie: createAction(FETCH_MOVIE),
   changeMovie: createAction(CHANGE_MOVIE),
+  deleteMovie: createAction(DELETE_MOVIE),
 })
 @CSSModules(styles)
 
@@ -44,8 +50,6 @@ class Movies extends Component {
 
   componentDidUpdate({ movie: prevMovie }) {
     const { movie } = this.props;
-
-    console.log(movie, prevMovie);
 
     if (!_isEqual(movie, prevMovie)) {
       this.setState({ movieData: movie }); // eslint-disable-line
@@ -89,7 +93,12 @@ class Movies extends Component {
 
   render() {
     const { movieData, isEditing } = this.state;
-    const { movie, className } = this.props;
+    const {
+      id,
+      movie,
+      className,
+      deleteMovie,
+    } = this.props;
     const fields = Object.keys(movie || {});
 
     return (
@@ -142,6 +151,18 @@ class Movies extends Component {
             </Button>
           </div>
         )}
+        <Button
+          styleName="button"
+          backgroundColor="black"
+          cbData={id}
+          onClick={deleteMovie}
+        >
+          <Text
+            color="white"
+            message="delete"
+            textAlign="center"
+          />
+        </Button>
       </div>
     );
   }
@@ -154,6 +175,7 @@ Movies.propTypes = {
   addMovie: PropTypes.func,
   fetchMovie: PropTypes.func,
   changeMovie: PropTypes.func,
+  deleteMovie: PropTypes.func,
 };
 
 export default Movies;
