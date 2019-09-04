@@ -100,6 +100,11 @@ class Movies extends Component {
       deleteMovie,
     } = this.props;
     const fields = Object.keys(movie || {});
+    const textProps = {
+      color: 'white',
+      fontWeight: '500',
+      textAlign: 'center',
+    };
 
     return (
       <div styleName="root" className={className}>
@@ -115,45 +120,33 @@ class Movies extends Component {
         {!isEditing && (
           <Button
             styleName="button"
-            backgroundColor="black"
+            backgroundColor="yellow"
             onClick={this.handleEditButtonClick}
           >
-            <Text
-              color="white"
-              message="edit"
-              textAlign="center"
-            />
+            <Text message="edit" {...textProps} />
           </Button>
         )}
         {isEditing && (
           <div styleName="buttonGroup">
             <Button
               styleName="button"
-              backgroundColor="black"
+              backgroundColor="green"
               onClick={this.handleSaveButtonClick}
             >
-              <Text
-                color="white"
-                message="save"
-                textAlign="center"
-              />
+              <Text message="save" {...textProps} />
             </Button>
             <Button
               styleName="button"
-              backgroundColor="black"
+              backgroundColor="red"
               onClick={this.handleCancelButtonClick}
             >
-              <Text
-                color="white"
-                message="cancel"
-                textAlign="center"
-              />
+              <Text message="cancel" {...textProps} />
             </Button>
           </div>
         )}
         <Button
           styleName="button"
-          backgroundColor="black"
+          backgroundColor="red"
           cbData={id}
           onClick={deleteMovie}
         >

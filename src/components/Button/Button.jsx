@@ -62,7 +62,7 @@ Button.propTypes = {
   disabled: PropTypes.bool,
   width: PropTypes.oneOf(['auto', '100']),
   backgroundColor: PropTypes.oneOf([
-    'black', 'white', 'transparent',
+    'black', 'white', 'transparent', 'red', 'yellow', 'green',
   ]),
   withBlurBg: PropTypes.bool,
   asProps: PropTypes.object,

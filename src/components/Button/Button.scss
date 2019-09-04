@@ -2,11 +2,14 @@
 @import '~styles/variables';
 @import '~styles/mixins';
 
+$darken-amount: 10%;
+
 .root {
   display: inline-flex;
   align-items: center;
   position: relative;
   height: 35px;
+  border-radius: 4px;
 
   &.disabled {
     opacity: 0.5;
@@ -21,6 +24,18 @@
           opacity: 1;
         }
       }
+
+      &-red {
+        background-color: darken($color-pomegranate, $darken-amount);
+      }
+
+      &-yellow {
+        background-color: darken($color-gorse, $darken-amount);
+      }
+
+      &-green {
+        background-color: darken($color-fruit-salad, $darken-amount);
+      }
     }
   }
 }
@@ -34,6 +49,7 @@
   height: 100%;
   overflow: hidden;
   transition: background-color 0.3s;
+  border-radius: 5px;
 }
 
 .backgroundColor {
@@ -59,6 +75,18 @@
 
   &-transparent {
     background-color: transparent;
+  }
+
+  &-red {
+    background-color: $color-pomegranate;
+  }
+
+  &-yellow {
+    background-color: $color-gorse;
+  }
+
+  &-green {
+    background-color: $color-fruit-salad;
   }
 }
 
