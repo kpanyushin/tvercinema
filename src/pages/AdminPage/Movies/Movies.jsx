@@ -9,7 +9,9 @@ import { denormalizedMoviesSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
+import Text from '_components/Text';
 import LinkTo from '_components/LinkTo';
+import Button from '_components/Button';
 import PreviewCard from '_components/PreviewCard';
 
 import styles from './Movies.scss';
@@ -30,10 +32,21 @@ class Movies extends Component {
 
   render() {
     const { movies, className } = this.props;
+    const textProps = {
+      color: 'white',
+      fontWeight: '500',
+      textAlign: 'center',
+      textTransform: 'uppercase',
+    };
 
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
+        <LinkTo linkTo="/admin/movies/new">
+          <Button backgroundColor="green">
+            <Text message="add" {...textProps} />
+          </Button>
+        </LinkTo>
         <ul styleName="moviesList">
           {movies.length > 0 && movies.map(({ id, title }) => (
             <LinkTo key={id} linkTo={`/admin/movies/${id}`}>

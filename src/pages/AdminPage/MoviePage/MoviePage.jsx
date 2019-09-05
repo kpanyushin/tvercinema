@@ -36,8 +36,15 @@ class Movies extends Component {
   constructor(props) {
     super(props);
 
+    const initialMovieData = {
+      title: '',
+      rating: '',
+      genre: '',
+      duration: 0,
+    };
+    this.isNewMovie = props.match.params.id === 'new';
     this.state = {
-      movieData: props.movie || {},
+      movieData: props.movie || initialMovieData,
       isEditing: false,
     };
   }
@@ -45,7 +52,7 @@ class Movies extends Component {
   componentDidMount() {
     const { id, movie, fetchMovie } = this.props;
 
-    if (!movie || !movie.id) fetchMovie(id);
+    if (!this.isNewMovie && !movie) fetchMovie(id);
   }
 
   componentDidUpdate({ movie: prevMovie }) {
@@ -58,27 +65,42 @@ class Movies extends Component {
 
   toggleIsEditing = isEditing => this.setState({ isEditing });
 
+  redirect = () => {
+    const { history } = this.props;
+
+    history.push('/admin/movies');
+  };
+
   handleEditButtonClick = () => {
     this.toggleIsEditing(true);
   };
 
   handleCancelButtonClick = () => {
-    this.toggleIsEditing(false);
+    if (this.isNewMovie) {
+      this.redirect();
+    } else {
+      this.toggleIsEditing(false);
+    }
   };
 
   handleSaveButtonClick = () => {
     const { movieData } = this.state;
-    const { changeMovie } = this.props;
+    const { changeMovie, addMovie } = this.props;
 
-    changeMovie(movieData);
-    this.toggleIsEditing(false);
+    if (this.isNewMovie) {
+      addMovie(movieData);
+      this.redirect();
+    } else {
+      changeMovie(movieData);
+      this.toggleIsEditing(false);
+    }
   };
 
   handleDeleteButtonClick = () => {
-    const { id, history, deleteMovie } = this.props;
+    const { id, deleteMovie } = this.props;
 
     deleteMovie(id);
-    history.push('/admin/movies');
+    this.redirect();
   };
 
   handleFieldChange = (field, value) => {
@@ -94,8 +116,8 @@ class Movies extends Component {
 
   render() {
     const { movieData, isEditing } = this.state;
-    const { className, movie } = this.props;
-    const fields = Object.keys(movie || {});
+    const { className } = this.props;
+    const fields = Object.keys(movieData || {});
     const textProps = {
       color: 'white',
       fontWeight: '500',
@@ -103,19 +125,17 @@ class Movies extends Component {
       textTransform: 'uppercase',
     };
 
-    console.log(this.props);
-
     return (
       <div styleName="root" className={className}>
-        {movieData && movieData.id && (
+        {movieData && (
           <EditForm
             data={movieData}
             fields={fields}
-            isEditing={isEditing}
+            isEditing={isEditing || this.isNewMovie}
             onFieldChange={this.handleFieldChange}
           />
         )}
-        {!isEditing && (
+        {!isEditing && !this.isNewMovie && (
           <Button
             styleName="button"
             backgroundColor="yellow"
@@ -124,7 +144,7 @@ class Movies extends Component {
             <Text message="edit" {...textProps} />
           </Button>
         )}
-        {isEditing && (
+        {(isEditing || this.isNewMovie) && (
           <div styleName="buttonGroup">
             <Button
               styleName="button"
@@ -142,13 +162,15 @@ class Movies extends Component {
             </Button>
           </div>
         )}
-        <Button
-          styleName="button"
-          backgroundColor="red"
-          onClick={this.handleDeleteButtonClick}
-        >
-          <Text message="delete" {...textProps} />
-        </Button>
+        {!this.isNewMovie && (
+          <Button
+            styleName="button"
+            backgroundColor="red"
+            onClick={this.handleDeleteButtonClick}
+          >
+            <Text message="delete" {...textProps} />
+          </Button>
+        )}
       </div>
     );
   }
@@ -157,6 +179,7 @@ class Movies extends Component {
 Movies.propTypes = {
   className: PropTypes.string,
   history: PropTypes.object,
+  match: PropTypes.object,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   movie: PropTypes.object,
   addMovie: PropTypes.func,
