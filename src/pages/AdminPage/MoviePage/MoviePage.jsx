@@ -1,9 +1,9 @@
+import { withRouter } from 'react-router-dom';
 import CSSModules from 'react-css-modules';
 import React, { Component } from 'react';
 import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
 
 import { movieSelector } from '_controllers/movies/selectors';
 import {
@@ -29,6 +29,7 @@ import styles from './MoviePage.scss';
   changeMovie: createAction(CHANGE_MOVIE),
   deleteMovie: createAction(DELETE_MOVIE),
 })
+@withRouter
 @CSSModules(styles)
 
 class Movies extends Component {
@@ -62,13 +63,7 @@ class Movies extends Component {
   };
 
   handleCancelButtonClick = () => {
-    // this.toggleIsEditing(false);
-    this.props.addMovie({
-      genre: 'comedy',
-      title: 'american pie',
-      rating: '9.1',
-      duration: '151',
-    });
+    this.toggleIsEditing(false);
   };
 
   handleSaveButtonClick = () => {
@@ -77,6 +72,13 @@ class Movies extends Component {
 
     changeMovie(movieData);
     this.toggleIsEditing(false);
+  };
+
+  handleDeleteButtonClick = () => {
+    const { id, history, deleteMovie } = this.props;
+
+    deleteMovie(id);
+    history.push('/admin/movies');
   };
 
   handleFieldChange = (field, value) => {
@@ -92,22 +94,19 @@ class Movies extends Component {
 
   render() {
     const { movieData, isEditing } = this.state;
-    const {
-      id,
-      movie,
-      className,
-      deleteMovie,
-    } = this.props;
+    const { className, movie } = this.props;
     const fields = Object.keys(movie || {});
     const textProps = {
       color: 'white',
       fontWeight: '500',
       textAlign: 'center',
+      textTransform: 'uppercase',
     };
+
+    console.log(this.props);
 
     return (
       <div styleName="root" className={className}>
-        <Helmet title="MoviePage" />
         {movieData && movieData.id && (
           <EditForm
             data={movieData}
@@ -146,14 +145,9 @@ class Movies extends Component {
         <Button
           styleName="button"
           backgroundColor="red"
-          cbData={id}
-          onClick={deleteMovie}
+          onClick={this.handleDeleteButtonClick}
         >
-          <Text
-            color="white"
-            message="delete"
-            textAlign="center"
-          />
+          <Text message="delete" {...textProps} />
         </Button>
       </div>
     );
@@ -162,6 +156,7 @@ class Movies extends Component {
 
 Movies.propTypes = {
   className: PropTypes.string,
+  history: PropTypes.object,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   movie: PropTypes.object,
   addMovie: PropTypes.func,

@@ -23,9 +23,9 @@ import styles from './Movies.scss';
 
 class Movies extends Component {
   componentDidMount() {
-    const { movies, fetchMovies } = this.props;
+    const { fetchMovies } = this.props;
 
-    if (!movies || !movies.length) fetchMovies();
+    fetchMovies();
   }
 
   render() {

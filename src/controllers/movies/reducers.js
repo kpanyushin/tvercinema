@@ -33,31 +33,30 @@ export default (state = initialState, action) => {
     }
 
     case CHANGE_MOVIE: {
-      // const { movieData, id } = payload;
+      const { movieData, id } = payload;
 
-      // return {
-      //   ...state,
-      //   channels: {
-      //     ...state.channels,
-      //     [channelId]: {
-      //       ...state.channels[channelId],
-      //       ...channelData,
-      //     },
-      //   },
-      // };
       return {
         ...state,
-        movies: state.movies,
+        channels: {
+          ...state.channels,
+          [id]: {
+            ...state.movies[id],
+            ...movieData,
+          },
+        },
       };
     }
 
     case DELETE_MOVIE: {
       const { id } = payload;
       const { movies } = state;
+      const newMovies = { ...movies };
+
+      delete newMovies[id];
 
       return {
         ...state,
-        movies: movies.filter(movie => movie.id !== id),
+        movies: newMovies,
       };
     }
 
