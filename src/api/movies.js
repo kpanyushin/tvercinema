@@ -1,10 +1,4 @@
-import Req, { externalRequest } from './request';
-
-export const fetchMovieExternal = id =>
-  externalRequest(`https://tvercinema.herokuapp.com/api/v1/movies/${id}`, {});
-
-export const fetchMoviesExternal = () =>
-  externalRequest('https://tvercinema.herokuapp.com/api/v1/movies', {});
+import Req from './request';
 
 export const fetchMovies = () =>
   Req.GET({

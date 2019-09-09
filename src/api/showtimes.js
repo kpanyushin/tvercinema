@@ -1,10 +1,4 @@
-import Req, { externalRequest } from './request';
-
-export const fetchShowtimeExternal = id =>
-  externalRequest(`https://tvercinema.herokuapp.com/api/v1/showtimes/${id}`, {});
-
-export const fetchShowtimesExternal = () =>
-  externalRequest('https://tvercinema.herokuapp.com/api/v1/showtimes', {});
+import Req from './request';
 
 export const fetchShowtimes = () =>
   Req.GET({
