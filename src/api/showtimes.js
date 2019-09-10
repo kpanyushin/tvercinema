@@ -8,7 +8,7 @@ export const fetchShowtimes = () =>
 export const fetchMovieShowtimes = movieId =>
   Req.GET({
     url: '/showtimes',
-    params: { movieId },
+    params: { movie_id: movieId },
   });
 
 export const fetchShowtime = id =>

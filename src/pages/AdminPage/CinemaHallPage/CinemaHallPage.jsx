@@ -19,7 +19,7 @@ import Text from '_components/Text';
 import Button from '_components/Button';
 import EditForm from '_components/EditForm';
 
-import styles from './MoviePage.scss';
+import styles from './CinemaHallPage.scss';
 
 @connect((state, { id }) => ({
   movie: movieSelector(state, id),
@@ -117,19 +117,15 @@ class Movies extends Component {
   render() {
     const { movieData, isEditing } = this.state;
     const { className } = this.props;
-    const fields = Object
-      .keys(movieData || {})
-      .filter(field => field !== 'id')
-      .map(field => ({
-        label: [field.charAt(0).toUpperCase(), ...field.slice(1)].join(''),
-        value: movieData[field],
-      }));
+    const fields = Object.keys(movieData || {});
     const textProps = {
       color: 'white',
       fontWeight: '500',
       textAlign: 'center',
       textTransform: 'uppercase',
     };
+
+    // console.log(fields);
 
     return (
       <div styleName="root" className={className}>
