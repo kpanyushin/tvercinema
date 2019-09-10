@@ -5,19 +5,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FETCH_MOVIES } from '_controllers/movies/actions';
-import { denormalizedMoviesSelector } from '_controllers/movies/selectors';
+import { moviesIdsSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
 import LinkTo from '_components/LinkTo';
 import Button from '_components/Button';
-import PreviewCard from '_components/PreviewCard';
+
+import Movie from './Movie';
 
 import styles from './Movies.scss';
 
 @connect(state => ({
-  movies: denormalizedMoviesSelector(state),
+  movies: moviesIdsSelector(state),
 }), {
   fetchMovies: createAction(FETCH_MOVIES),
 })
@@ -48,13 +49,8 @@ class Movies extends Component {
           </Button>
         </LinkTo>
         <ul styleName="moviesList">
-          {movies.length > 0 && movies.map(({ id, title }) => (
-            <LinkTo key={id} linkTo={`/admin/movies/${id}`}>
-              <PreviewCard
-                styleName="previewCard"
-                title={title}
-              />
-            </LinkTo>
+          {movies.length > 0 && movies.map(id => (
+            <Movie key={id} id={id} />
           ))}
         </ul>
       </div>

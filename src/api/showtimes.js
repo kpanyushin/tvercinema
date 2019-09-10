@@ -5,6 +5,12 @@ export const fetchShowtimes = () =>
     url: '/showtimes',
   });
 
+export const fetchMovieShowtimes = movieId =>
+  Req.GET({
+    url: '/showtimes',
+    params: { movieId },
+  });
+
 export const fetchShowtime = id =>
   Req.GET({
     url: `/showtimes/${id}`,

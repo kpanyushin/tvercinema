@@ -8,6 +8,7 @@ import {
   fetchMovies as fetchMoviesApi,
   changeMovie as changeMovieApi,
   deleteMovie as deleteMovieApi,
+  fetchMovieShowtimes as fetchMovieShowtimesApi,
 } from '_api';
 
 import {
@@ -17,6 +18,7 @@ import {
   FETCH_MOVIES,
   CHANGE_MOVIE,
   DELETE_MOVIE,
+  SET_MOVIE_SHOWTIMES,
 } from './actions';
 
 import { moviesSerializer, movieSerializer } from './serializers';
@@ -34,10 +36,18 @@ export function* fetchMovies() {
 
 export function* fetchMovie({ payload }) {
   try {
-    const response = yield call(fetchMovieApi, payload);
-    const movie = movieSerializer(response.data);
+    const movieResponse = yield call(fetchMovieApi, payload);
+    const { status, data } = movieResponse;
+    const movie = movieSerializer(data);
 
     yield put(createAction(SET_MOVIES)([movie]));
+
+    if (status === 200) {
+      const showtimesResponse = yield call(fetchMovieShowtimesApi, data.id);
+      const { data: showtimesData } = showtimesResponse;
+
+      yield put(createAction(SET_MOVIE_SHOWTIMES)({ movieId: data.id, showtimes: showtimesData }));
+    }
   } catch (err) {
     console.error(err);
   }

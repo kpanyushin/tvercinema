@@ -1,6 +1,6 @@
 import _union from 'lodash/union';
 
-import { normalizedMovies } from '_schemas/movies';
+import { normalizedMovies, normalizedShowtimes } from '_schemas/movies';
 import { merge } from '_utils/merge';
 
 import {
@@ -8,13 +8,14 @@ import {
   SET_MOVIES,
   CHANGE_MOVIE,
   DELETE_MOVIE,
+  SET_MOVIE_SHOWTIMES,
 } from './actions';
 
 
 const initialState = {
   movies: {},
   moviesIds: [],
-  showtimes: {},
+  showtimesIds: [],
 };
 
 export default (state = initialState, action) => {
@@ -58,6 +59,23 @@ export default (state = initialState, action) => {
       return {
         ...state,
         movies: newMovies,
+      };
+    }
+
+    case SET_MOVIE_SHOWTIMES: {
+      const { movies } = state;
+      const { movieId, showtimes } = payload;
+      const { result } = normalizedShowtimes(showtimes);
+
+      return {
+        ...state,
+        movies: {
+          ...movies,
+          [movieId]: {
+            ...movies[movieId],
+            showtimesIds: result,
+          },
+        },
       };
     }
 
