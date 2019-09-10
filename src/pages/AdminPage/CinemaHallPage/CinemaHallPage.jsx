@@ -5,14 +5,13 @@ import _isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { movieSelector } from '_controllers/movies/selectors';
+import { cinemaHallSelector } from '_controllers/cinemahalls/selectors';
 import {
-  CHANGE_MOVIE,
-  DELETE_MOVIE,
-  FETCH_MOVIE,
-  ADD_MOVIE,
-} from '_controllers/movies/actions';
-
+  CHANGE_CINEMAHALL,
+  DELETE_CINEMAHALL,
+  FETCH_CINEMAHALL,
+  ADD_CINEMAHALL,
+} from '_controllers/cinemahalls/actions';
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
@@ -22,44 +21,42 @@ import EditForm from '_components/EditForm';
 import styles from './CinemaHallPage.scss';
 
 @connect((state, { id }) => ({
-  movie: movieSelector(state, id),
+  cinemaHall: cinemaHallSelector(state, id),
 }), {
-  addMovie: createAction(ADD_MOVIE),
-  fetchMovie: createAction(FETCH_MOVIE),
-  changeMovie: createAction(CHANGE_MOVIE),
-  deleteMovie: createAction(DELETE_MOVIE),
+  addCinemaHall: createAction(ADD_CINEMAHALL),
+  fetchCinemaHall: createAction(FETCH_CINEMAHALL),
+  changeCinemaHall: createAction(CHANGE_CINEMAHALL),
+  deleteCinemaHall: createAction(DELETE_CINEMAHALL),
 })
 @withRouter
 @CSSModules(styles)
 
-class Movies extends Component {
+class CinemaHallPage extends Component {
   constructor(props) {
     super(props);
 
-    const initialMovieData = {
+    const initialCinemaHallData = {
       title: '',
-      rating: '',
-      genre: '',
-      duration: 0,
+      capacity: 0,
     };
-    this.isNewMovie = props.match.params.id === 'new';
+    this.isNewHall = props.match.params.id === 'new';
     this.state = {
-      movieData: props.movie || initialMovieData,
+      cinemaHallData: props.cinemaHall || initialCinemaHallData,
       isEditing: false,
     };
   }
 
   componentDidMount() {
-    const { id, movie, fetchMovie } = this.props;
+    const { id, cinemaHall, fetchCinemaHall } = this.props;
 
-    if (!this.isNewMovie && !movie) fetchMovie(id);
+    if (!this.isNewHall && !cinemaHall) fetchCinemaHall(id);
   }
 
-  componentDidUpdate({ movie: prevMovie }) {
-    const { movie } = this.props;
+  componentDidUpdate({ cinemaHall: prevCinemaHall }) {
+    const { cinemaHall } = this.props;
 
-    if (!_isEqual(movie, prevMovie)) {
-      this.setState({ movieData: movie }); // eslint-disable-line
+    if (!_isEqual(cinemaHall, prevCinemaHall)) {
+      this.setState({ cinemaHallData: cinemaHall }); // eslint-disable-line
     }
   }
 
@@ -68,7 +65,7 @@ class Movies extends Component {
   redirect = () => {
     const { history } = this.props;
 
-    history.push('/admin/movies');
+    history.push('/admin/cinema halls');
   };
 
   handleEditButtonClick = () => {
@@ -76,7 +73,7 @@ class Movies extends Component {
   };
 
   handleCancelButtonClick = () => {
-    if (this.isNewMovie) {
+    if (this.isNewHall) {
       this.redirect();
     } else {
       this.toggleIsEditing(false);
@@ -84,40 +81,47 @@ class Movies extends Component {
   };
 
   handleSaveButtonClick = () => {
-    const { movieData } = this.state;
-    const { changeMovie, addMovie } = this.props;
+    const { cinemaHallData } = this.state;
+    const { changeCinemaHall, addCinemaHall } = this.props;
 
-    if (this.isNewMovie) {
-      addMovie(movieData);
+    if (this.isNewHall) {
+      addCinemaHall(cinemaHallData);
       this.redirect();
     } else {
-      changeMovie(movieData);
+      changeCinemaHall(cinemaHallData);
       this.toggleIsEditing(false);
     }
   };
 
   handleDeleteButtonClick = () => {
-    const { id, deleteMovie } = this.props;
+    const { id, deleteCinemaHall } = this.props;
 
-    deleteMovie(id);
+    deleteCinemaHall(id);
     this.redirect();
   };
 
   handleFieldChange = (field, value) => {
-    const { movieData } = this.state;
+    const { cinemaHallData } = this.state;
 
     this.setState({
-      movieData: {
-        ...movieData,
+      cinemaHallData: {
+        ...cinemaHallData,
         [field]: value,
       },
     });
   };
 
   render() {
-    const { movieData, isEditing } = this.state;
+    const { cinemaHallData, isEditing } = this.state;
     const { className } = this.props;
-    const fields = Object.keys(movieData || {});
+    const fields = Object
+      .keys(cinemaHallData || {})
+      .filter(field => field !== 'id' && field !== 'created_at' && field !== 'updated_at')
+      // to be changed
+      .map(field => ({
+        label: [field.charAt(0).toUpperCase(), ...field.slice(1)].join(''),
+        value: cinemaHallData[field],
+      }));
     const textProps = {
       color: 'white',
       fontWeight: '500',
@@ -125,19 +129,16 @@ class Movies extends Component {
       textTransform: 'uppercase',
     };
 
-    // console.log(fields);
-
     return (
       <div styleName="root" className={className}>
-        {movieData && (
+        {cinemaHallData && (
           <EditForm
-            data={movieData}
             fields={fields}
-            isEditing={isEditing || this.isNewMovie}
+            isEditing={isEditing || this.isNewHall}
             onFieldChange={this.handleFieldChange}
           />
         )}
-        {!isEditing && !this.isNewMovie && (
+        {!isEditing && !this.isNewHall && (
           <Button
             styleName="button"
             backgroundColor="yellow"
@@ -146,7 +147,7 @@ class Movies extends Component {
             <Text message="edit" {...textProps} />
           </Button>
         )}
-        {(isEditing || this.isNewMovie) && (
+        {(isEditing || this.isNewHall) && (
           <div styleName="buttonGroup">
             <Button
               styleName="button"
@@ -164,7 +165,7 @@ class Movies extends Component {
             </Button>
           </div>
         )}
-        {!this.isNewMovie && (
+        {!this.isNewHall && (
           <Button
             styleName="button"
             backgroundColor="red"
@@ -178,16 +179,16 @@ class Movies extends Component {
   }
 }
 
-Movies.propTypes = {
+CinemaHallPage.propTypes = {
   className: PropTypes.string,
   history: PropTypes.object,
   match: PropTypes.object,
+  cinemaHall: PropTypes.object,
   id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  movie: PropTypes.object,
-  addMovie: PropTypes.func,
-  fetchMovie: PropTypes.func,
-  changeMovie: PropTypes.func,
-  deleteMovie: PropTypes.func,
+  addCinemaHall: PropTypes.func,
+  fetchCinemaHall: PropTypes.func,
+  changeCinemaHall: PropTypes.func,
+  deleteCinemaHall: PropTypes.func,
 };
 
-export default Movies;
+export default CinemaHallPage;

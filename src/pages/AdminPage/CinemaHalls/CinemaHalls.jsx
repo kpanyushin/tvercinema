@@ -5,17 +5,16 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { FETCH_CINEMAHALLS } from '_controllers/cinemahalls/actions';
-import { cinemaHallsSelector } from '_controllers/cinemahalls/selectors';
+import { cinemaHallsIdsSelector } from '_controllers/cinemahalls/selectors';
 
 import createAction from '_utils/createAction';
 
-import LinkTo from '_components/LinkTo';
-import PreviewCard from '_components/PreviewCard';
+import CinemaHall from './CinemaHall';
 
 import styles from './CinemaHalls.scss';
 
 @connect(state => ({
-  cinemaHalls: cinemaHallsSelector(state),
+  cinemaHalls: cinemaHallsIdsSelector(state),
 }), {
   fetchCinemaHalls: createAction(FETCH_CINEMAHALLS),
 })
@@ -23,9 +22,9 @@ import styles from './CinemaHalls.scss';
 
 class CinemaHalls extends Component {
   componentDidMount() {
-    const { cinemaHalls, fetchCinemaHalls } = this.props;
+    const { fetchCinemaHalls } = this.props;
 
-    if (!cinemaHalls || !cinemaHalls.length) fetchCinemaHalls();
+    fetchCinemaHalls();
   }
 
   render() {
@@ -35,13 +34,8 @@ class CinemaHalls extends Component {
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
         <ul styleName="hallsList">
-          {cinemaHalls.length > 0 && cinemaHalls.map(({ id, title }) => (
-            <LinkTo key={id} linkTo={`/admin/cinemahalls/${id}`}>
-              <PreviewCard
-                styleName="previewCard"
-                title={title}
-              />
-            </LinkTo>
+          {cinemaHalls.length > 0 && cinemaHalls.map(id => (
+            <CinemaHall ky={id} id={id} />
           ))}
         </ul>
       </div>

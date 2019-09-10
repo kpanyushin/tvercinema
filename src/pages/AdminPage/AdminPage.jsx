@@ -8,6 +8,7 @@ import Movies from './Movies';
 import MoviePage from './MoviePage';
 import Showtimes from './Showtimes';
 import CinemaHalls from './CinemaHalls';
+import CinemaHallPage from './CinemaHallPage';
 
 import styles from './AdminPage.scss';
 
@@ -20,7 +21,10 @@ class AdminPage extends Component {
     switch (section) {
       case 'movies': return id ? <MoviePage id={id} /> : <Movies />;
       case 'showtimes': return <Showtimes />;
-      case 'cinema halls': return <CinemaHalls />;
+      case 'cinema halls':
+      case 'cinemahalls': {
+        return id ? <CinemaHallPage id={id} /> : <CinemaHalls />;
+      }
       default: return null;
     }
   };

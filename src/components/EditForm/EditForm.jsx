@@ -16,7 +16,7 @@ const EditForm = ({
     {fields.map(({ label, value }) => (
       <EditField
         styleName="field"
-        label={label}
+        name={label}
         value={value}
         isEditing={isEditing}
         onChange={onFieldChange}

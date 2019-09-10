@@ -10,16 +10,16 @@ export const fetchHall = id =>
     url: `/auditoria/${id}`,
   });
 
-export const addHall = data =>
+export const addHall = ({ id, ...data }) =>
   Req.POST({
     url: '/auditoria',
-    params: { data },
+    data,
   });
 
-export const changeHall = (data, id) =>
+export const changeHall = ({ id, ...data }) =>
   Req.PUT({
     url: `/auditoria/${id}`,
-    params: { data },
+    data,
   });
 
 export const deleteHall = id =>

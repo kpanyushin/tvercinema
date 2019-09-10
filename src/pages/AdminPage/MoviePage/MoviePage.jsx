@@ -32,7 +32,7 @@ import styles from './MoviePage.scss';
 @withRouter
 @CSSModules(styles)
 
-class Movies extends Component {
+class MoviePage extends Component {
   constructor(props) {
     super(props);
 
@@ -182,7 +182,7 @@ class Movies extends Component {
   }
 }
 
-Movies.propTypes = {
+MoviePage.propTypes = {
   className: PropTypes.string,
   history: PropTypes.object,
   match: PropTypes.object,
@@ -194,4 +194,4 @@ Movies.propTypes = {
   deleteMovie: PropTypes.func,
 };
 
-export default Movies;
+export default MoviePage;
