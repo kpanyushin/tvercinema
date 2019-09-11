@@ -9,6 +9,10 @@ import { cinemaHallsIdsSelector } from '_controllers/cinemahalls/selectors';
 
 import createAction from '_utils/createAction';
 
+import Text from '_components/Text';
+import LinkTo from '_components/LinkTo';
+import Button from '_components/Button';
+
 import CinemaHall from './CinemaHall';
 
 import styles from './CinemaHalls.scss';
@@ -29,13 +33,24 @@ class CinemaHalls extends Component {
 
   render() {
     const { cinemaHalls, className } = this.props;
+    const textProps = {
+      color: 'white',
+      fontWeight: '500',
+      textAlign: 'center',
+      textTransform: 'uppercase',
+    };
 
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
+        <LinkTo linkTo="/admin/cinemahalls/new">
+          <Button backgroundColor="green">
+            <Text message="add" {...textProps} />
+          </Button>
+        </LinkTo>
         <ul styleName="hallsList">
           {cinemaHalls.length > 0 && cinemaHalls.map(id => (
-            <CinemaHall ky={id} id={id} />
+            <CinemaHall key={id} id={id} />
           ))}
         </ul>
       </div>
