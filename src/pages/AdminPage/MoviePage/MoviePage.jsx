@@ -135,7 +135,7 @@ class MoviePage extends Component {
       <div styleName="root" className={className}>
         {movieData && (
           <EditForm
-            data={movieData}
+            styleName="editForm"
             fields={fields}
             isEditing={isEditing || this.isNewMovie}
             onFieldChange={this.handleFieldChange}

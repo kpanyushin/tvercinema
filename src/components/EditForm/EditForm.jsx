@@ -17,6 +17,7 @@ const EditForm = ({
     {fields.map(({ label, value }) => (
       <EditField
         styleName="field"
+        key={label}
         name={label}
         value={value}
         isEditing={isEditing}
