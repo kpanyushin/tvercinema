@@ -7,18 +7,8 @@
 
 .input {
   margin-top: 10px;
-  padding: 10px 20px;
-  border: 1px solid;
-  border-color: transparent;
-  background-color: $color-athens-gray;
-  transition: background-color 0.3s, border-color 0.3s;
 
-  &.isEditing {
-    cursor: text;
-
-    &:focus {
-      background-color: $color-alto;
-      border-color: $color-rolling-stone;
-    }
+  &:first-child {
+    margin-top: 0;
   }
 }

@@ -26,6 +26,7 @@ export default (
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
 
         ${head.title.toString()}
         ${head.base.toString()}

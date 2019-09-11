@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import { Form } from 'semantic-ui-react';
 import CSSModules from 'react-css-modules';
 import React, { PureComponent } from 'react';
 
@@ -25,17 +25,19 @@ class EditField extends PureComponent {
     } = this.props;
 
     return (
-      <li styleName="root" className={className}>
-        <Text message={name} />
-        <input
-          styleName={classnames('input', { isEditing })}
+      <Form.Field styleName="root" className={className}>
+        <label htmlFor={name}><Text message={name} /></label>
+        <Form.Input
+          styleName="input"
+          fluid
           type="text"
           name={name}
           value={value}
+          placeholder={name}
           disabled={!isEditing}
           onChange={this.handleInputChange}
         />
-      </li>
+      </Form.Field>
     );
   }
 }
@@ -46,6 +48,10 @@ EditField.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func,
+};
+
+EditField.defaultProps = {
+  onChange: () => {},
 };
 
 export default EditField;

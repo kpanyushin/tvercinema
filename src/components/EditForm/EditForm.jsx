@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Form } from 'semantic-ui-react';
 import CSSModules from 'react-css-modules';
 
 import EditField from './EditField';
@@ -12,7 +13,7 @@ const EditForm = ({
   fields,
   onFieldChange,
 }) => (
-  <ul styleName="root" className={className}>
+  <Form styleName="root" className={className}>
     {fields.map(({ label, value }) => (
       <EditField
         styleName="field"
@@ -22,7 +23,7 @@ const EditForm = ({
         onChange={onFieldChange}
       />
     ))}
-  </ul>
+  </Form>
 );
 
 EditForm.propTypes = {
