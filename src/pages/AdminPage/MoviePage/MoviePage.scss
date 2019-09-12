@@ -1,12 +1,10 @@
 .root {
-  display: block;
   margin: 0 auto;
   padding: 0 20px;
   max-width: 700px;
 }
 
 .button {
-  margin-top: 20px;
   justify-content: center;
   width: 130px;
 }
@@ -17,5 +15,5 @@
 }
 
 .editForm {
-  display: block;
+  margin-bottom: 20px;
 }

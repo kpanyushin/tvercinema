@@ -15,7 +15,7 @@ import {
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
-import Button from '_components/Button';
+import { Button } from '_components/Button';
 import EditForm from '_components/EditForm';
 
 import styles from './CinemaHallPage.scss';

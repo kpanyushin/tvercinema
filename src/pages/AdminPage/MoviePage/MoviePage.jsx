@@ -16,8 +16,8 @@ import {
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
-import Button from '_components/Button';
 import EditForm from '_components/EditForm';
+import { Button, EditButton, DeleteButton } from '_components/Button';
 
 import styles from './MoviePage.scss';
 
@@ -142,13 +142,7 @@ class MoviePage extends Component {
           />
         )}
         {!isEditing && !this.isNewMovie && (
-          <Button
-            styleName="button"
-            backgroundColor="yellow"
-            onClick={this.handleEditButtonClick}
-          >
-            <Text message="edit" {...textProps} />
-          </Button>
+          <EditButton styleName="button" onClick={this.handleEditButtonClick} />
         )}
         {(isEditing || this.isNewMovie) && (
           <div styleName="buttonGroup">
@@ -169,13 +163,7 @@ class MoviePage extends Component {
           </div>
         )}
         {!this.isNewMovie && (
-          <Button
-            styleName="button"
-            backgroundColor="red"
-            onClick={this.handleDeleteButtonClick}
-          >
-            <Text message="delete" {...textProps} />
-          </Button>
+          <DeleteButton styleName="button" onClick={this.handleDeleteButtonClick} />
         )}
       </div>
     );

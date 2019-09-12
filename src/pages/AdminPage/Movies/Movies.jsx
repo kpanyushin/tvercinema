@@ -1,4 +1,3 @@
-import { Button, Icon } from 'semantic-ui-react';
 import CSSModules from 'react-css-modules';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -10,9 +9,8 @@ import { moviesIdsSelector } from '_controllers/movies/selectors';
 
 import createAction from '_utils/createAction';
 
-// import Text from '_components/Text';
 import LinkTo from '_components/LinkTo';
-// import Button from '_components/Button';
+import { AddButton } from '_components/Button';
 
 import Movie from './Movie';
 
@@ -34,25 +32,12 @@ class Movies extends Component {
 
   render() {
     const { movies, className } = this.props;
-    // const textProps = {
-    //   color: 'white',
-    //   fontWeight: '500',
-    //   textAlign: 'center',
-    //   textTransform: 'uppercase',
-    // };
 
     return (
       <div styleName="root" className={className}>
         <Helmet title="MoviesPage" />
         <LinkTo linkTo="/admin/movies/new">
-          <Button animated="vertical" color="green">
-            <Button.Content hidden>
-              Add
-            </Button.Content>
-            <Button.Content visible>
-              <Icon name="plus" />
-            </Button.Content>
-          </Button>
+          <AddButton />
         </LinkTo>
         <ul styleName="moviesList">
           {movies.length > 0 && movies.map(id => (
