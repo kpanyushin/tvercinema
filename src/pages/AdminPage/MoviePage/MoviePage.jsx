@@ -16,6 +16,7 @@ import {
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
+import Alert from '_components/Alert';
 import EditForm from '_components/EditForm';
 import { Button, EditButton, DeleteButton } from '_components/Button';
 
@@ -165,6 +166,11 @@ class MoviePage extends Component {
         {!this.isNewMovie && (
           <DeleteButton styleName="button" onClick={this.handleDeleteButtonClick} />
         )}
+        <Alert type="default" />
+        <Alert type="error" />
+        <Alert type="warning" />
+        <Alert type="success" />
+        <Alert type="info" />
       </div>
     );
   }
