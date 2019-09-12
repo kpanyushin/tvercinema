@@ -16,12 +16,21 @@ const Alert = ({
   const contentMessage = intl.formatMessage({ id: content, defaultMessage: content });
 
   return (
-    <Message
-      className={className}
-      {...parseType(type)}
-      header={headerMessage}
-      content={contentMessage}
-    />
+    <div style={{
+      maxWidth: '500px',
+      margin: '0 auto',
+      position: 'absolute',
+      bottom: '50px',
+      left: '365px',
+    }}
+    >
+      <Message
+        className={className}
+        {...parseType(type)}
+        header={headerMessage}
+        content={contentMessage}
+      />
+    </div>
   );
 };
 

@@ -7,6 +7,7 @@ import Helmet from 'react-helmet';
 import config from '_config';
 import browserHOC from '_hocs/browser';
 
+import Messages from '_components/Messages';
 import AppRouter from '_components/AppRouter';
 
 import '_styles/normalize.scss';
@@ -16,6 +17,7 @@ const App = props => (
   <Fragment>
     <Helmet {...config.app} />
     <AppRouter routes={props.routes} />
+    <Messages />
   </Fragment>
 );
 

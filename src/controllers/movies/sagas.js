@@ -21,6 +21,8 @@ import {
   SET_MOVIE_SHOWTIMES,
 } from './actions';
 
+import { ADD_MESSAGE } from '_controllers/messages/actions';
+
 import { moviesSerializer, movieSerializer } from './serializers';
 
 export function* fetchMovies() {
@@ -55,7 +57,17 @@ export function* fetchMovie({ payload }) {
 
 export function* changeMovie({ payload }) {
   try {
-    yield call(changeMovieApi, payload);
+    const response = yield call(changeMovieApi, payload);
+    const { status } = response;
+
+    if (status === 200) {
+      yield put(createAction(ADD_MESSAGE)({
+        messageId: 'successChange',
+        type: 'success',
+        header: 'success',
+        message: 'the movie has been changed successfully',
+      }));
+    }
   } catch (err) {
     console.error(err);
   }

@@ -6,7 +6,7 @@ export const messagesRootSelector = createSelector(
   ({ messages }) => messages,
 );
 
-export const notificationsSelector = createSelector(
+export const messagesSelector = createSelector(
   messagesRootSelector,
   ({ messages }) => messages,
 );
