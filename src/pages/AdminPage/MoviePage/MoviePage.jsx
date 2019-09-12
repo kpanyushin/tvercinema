@@ -16,8 +16,8 @@ import {
 import createAction from '_utils/createAction';
 
 import Text from '_components/Text';
-import Alert from '_components/Alert';
 import EditForm from '_components/EditForm';
+import { ModalBasic } from '_components/Modal';
 import { Button, EditButton, DeleteButton } from '_components/Button';
 
 import styles from './MoviePage.scss';
@@ -163,14 +163,27 @@ class MoviePage extends Component {
             </Button>
           </div>
         )}
-        {!this.isNewMovie && (
+        {/* {!this.isNewMovie && (
           <DeleteButton styleName="button" onClick={this.handleDeleteButtonClick} />
-        )}
-        <Alert type="default" />
+        )} */}
+        {/* <Alert type="default" />
         <Alert type="error" />
         <Alert type="warning" />
         <Alert type="success" />
-        <Alert type="info" />
+        <Alert type="info" /> */}
+        <ModalBasic
+          headerContent={{
+            iconName: 'recycle',
+            message: 'Remove this movie',
+          }}
+          content="Are you sure you want to remove this movie?"
+          trigger={<DeleteButton styleName="button" />}
+          yesActionContent={{
+            iconName: 'checkmark',
+            message: 'Yes',
+            onClick: this.handleDeleteButtonClick,
+          }}
+        />
       </div>
     );
   }
