@@ -21,7 +21,6 @@ class Messages extends Component {
     const { messages, hideMessage } = this.props;
 
     return messages.map(({
-      id,
       type,
       header,
       message,
@@ -30,8 +29,8 @@ class Messages extends Component {
     }) => (
       <Alert
         key={messageId}
-        cbData={id}
         type={type}
+        id={messageId}
         header={header}
         content={message}
         isVisible={isVisible}

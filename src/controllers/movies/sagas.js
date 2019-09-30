@@ -62,7 +62,7 @@ export function* changeMovie({ payload }) {
 
     if (status === 200) {
       yield put(createAction(ADD_MESSAGE)({
-        messageId: 'successChange',
+        id: 'successChange',
         type: 'success',
         header: 'success',
         message: 'the movie has been changed successfully',
@@ -75,7 +75,18 @@ export function* changeMovie({ payload }) {
 
 export function* addMovie({ payload }) {
   try {
-    yield call(addMovieApi, payload);
+    const response = yield call(addMovieApi, payload);
+    const { status } = response;
+
+    if (status === 200) {
+      yield put(createAction(SET_MOVIES)([payload]));
+      yield put(createAction(ADD_MESSAGE)({
+        id: 'successAdd',
+        type: 'success',
+        header: 'success',
+        message: 'the movie has been added successfully',
+      }));
+    }
   } catch (err) {
     console.error(err);
   }
@@ -84,6 +95,12 @@ export function* addMovie({ payload }) {
 export function* deleteMovie({ payload }) {
   try {
     yield call(deleteMovieApi, payload);
+    yield put(createAction(ADD_MESSAGE)({
+      id: 'successDelete',
+      type: 'success',
+      header: 'success',
+      message: 'the movie has been removed successfully',
+    }));
   } catch (err) {
     console.error(err);
   }

@@ -4,7 +4,6 @@ import { normalizedMovies, normalizedShowtimes } from '_schemas/movies';
 import { merge } from '_utils/merge';
 
 import {
-  // ADD_MOVIE,
   SET_MOVIES,
   CHANGE_MOVIE,
   DELETE_MOVIE,
@@ -51,14 +50,12 @@ export default (state = initialState, action) => {
 
     case DELETE_MOVIE: {
       const { id } = payload;
-      const { movies } = state;
-      const newMovies = { ...movies };
-
-      delete newMovies[id];
+      const { moviesIds } = state;
+      const newMoviesIds = moviesIds.filter(movieId => movieId !== id);
 
       return {
         ...state,
-        movies: newMovies,
+        moviesIds: newMoviesIds,
       };
     }
 

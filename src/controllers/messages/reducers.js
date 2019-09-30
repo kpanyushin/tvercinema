@@ -12,7 +12,7 @@ const initialState = {
 
 function hideMessageById(messages, id) {
   return messages.map((message) => {
-    if (message.id === id) {
+    if (message.messageId === id) {
       return { ...message, isVisible: false };
     }
 
