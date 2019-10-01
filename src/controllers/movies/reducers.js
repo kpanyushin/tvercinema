@@ -49,9 +49,8 @@ export default (state = initialState, action) => {
     }
 
     case DELETE_MOVIE: {
-      const { id } = payload;
       const { moviesIds } = state;
-      const newMoviesIds = moviesIds.filter(movieId => movieId !== id);
+      const newMoviesIds = moviesIds.filter(movieId => movieId !== Number(payload));
 
       return {
         ...state,

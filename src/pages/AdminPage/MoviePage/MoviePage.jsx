@@ -163,14 +163,6 @@ class MoviePage extends Component {
             </Button>
           </div>
         )}
-        {/* {!this.isNewMovie && (
-          <DeleteButton styleName="button" onClick={this.handleDeleteButtonClick} />
-        )} */}
-        {/* <Alert type="default" />
-        <Alert type="error" />
-        <Alert type="warning" />
-        <Alert type="success" />
-        <Alert type="info" /> */}
         <ModalBasic
           headerContent={{
             iconName: 'recycle',
