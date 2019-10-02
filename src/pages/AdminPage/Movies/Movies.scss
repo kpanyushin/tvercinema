@@ -5,7 +5,11 @@
 .moviesList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+}
+
+.movie {
+  margin-left: 20px;
+  margin-top: 20px;
 }
 
 .previewCard {

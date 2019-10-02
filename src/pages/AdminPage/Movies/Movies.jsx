@@ -41,7 +41,7 @@ class Movies extends Component {
         </LinkTo>
         <ul styleName="moviesList">
           {movies.length > 0 && movies.map(id => (
-            <Movie key={id} id={id} />
+            <Movie styleName="movie" key={id} id={id} />
           ))}
         </ul>
       </div>
