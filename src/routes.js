@@ -1,4 +1,5 @@
-import HomePage from '_pages/HomePage';
+// import HomePage from '_pages/HomePage';
+import MainPage from '_pages/MainPage';
 import AdminPage from '_pages/AdminPage';
 
 export default [
@@ -6,8 +7,7 @@ export default [
     path: '/',
     exact: true,
     cache: false,
-    component: HomePage,
-    sagasToRun: [],
+    component: MainPage,
   },
   {
     path: '/admin/:section?/:id?',

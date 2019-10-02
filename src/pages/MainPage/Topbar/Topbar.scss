@@ -1,0 +1,9 @@
+@import '~styles/variables';
+
+.root {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  background-color: $color-ebony-clay;
+  color: $color-bali-hai;
+}

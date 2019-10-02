@@ -1,0 +1,17 @@
+.root {
+  display: block;
+}
+
+.moviesList {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.movie {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.previewCard {
+  margin: 0;
+}
